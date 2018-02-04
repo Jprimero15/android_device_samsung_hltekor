@@ -16,14 +16,14 @@
 # inherit from common hlte
 -include device/samsung/hlte-common/BoardConfigCommon.mk
 
-TARGET_OTA_ASSERT_DEVICE := hlte,hltespr,hltexx
+TARGET_OTA_ASSERT_DEVICE := hlte,hltekor,hltektt,hltelgt,hlteskt
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm8974
-TARGET_LIBINIT_MSM8974_DEFINES_FILE := device/samsung/hlte/init/init_hlte.cpp
+TARGET_LIBINIT_MSM8974_DEFINES_FILE := device/samsung/hltekor/init/init_hlte.cpp
 
 # Kernel
-TARGET_KERNEL_CONFIG := lineage_hlte_bcm2079x_defconfig
+TARGET_KERNEL_CONFIG := lineage_hltekor_defconfig
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 11534336
@@ -33,4 +33,4 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1572864000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
 
 # inherit from the proprietary version
--include vendor/samsung/hlte/BoardConfigVendor.mk
+-include vendor/samsung/hltekor/BoardConfigVendor.mk
