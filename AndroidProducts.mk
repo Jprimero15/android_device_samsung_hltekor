@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_hltekor.mk
+    $(LOCAL_DIR)/arrow_hltekor.mk
