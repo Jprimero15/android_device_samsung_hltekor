@@ -59,21 +59,18 @@ void init_target_properties()
         property_override("ro.build.description", "hltektt-user 5.0 LRX21V N900KKKU0GOC4 release-keys");
         property_override("ro.product.model", "SM-N900K");
         property_override("ro.product.device", "hltektt");
-        gsm_properties("ktt");
     } else if (strstr(bootloader, "N900L")) {
         /* hltelgt - LG Uplus */
         property_override("ro.build.fingerprint", "samsung/hltelgt/hltelgt:5.0/LRX21V/N900LKLU0GPI1:user/release-keys");
         property_override("ro.build.description", "hltelgt-user 5.0 LRX21V N900LKLU0GPI1 release-keys");
         property_override("ro.product.model", "SM-N900L");
         property_override("ro.product.device", "hltelgt");
-        gsm_properties("lgt");
     } else if (strstr(bootloader, "N900S")) {
         /* hlteskt - SK Telecom */
         property_override("ro.build.fingerprint", "samsung/hlteskt/hlteskt:5.0/LRX21V/N900SKSU0GPI1:user/release-keys");
         property_override("ro.build.description", "hlteskt-user 5.0 LRX21V N900SKSU0GPI1 release-keys");
         property_override("ro.product.model", "SM-N900S");
         property_override("ro.product.device", "hlteskt");
-        gsm_properties("skt");
     }
 
     property_get("ro.product.device", device, NULL);
