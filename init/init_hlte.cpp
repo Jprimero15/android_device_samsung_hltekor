@@ -39,20 +39,6 @@
 
 #include "init_msm8974.h"
 
-void set_rild_libpath(char const *variant)
-{
-    std::string libpath("/system/vendor/lib/libsec-ril.");
-    libpath += variant;
-    libpath += ".so";
-
-    property_override("rild.libpath", libpath.c_str());
-}
-
-void gsm_properties(char const *rild_lib_variant)
-{
-    set_rild_libpath(rild_lib_variant);
-}
-
 void init_target_properties()
 {
     char platform[PROP_VALUE_MAX];
