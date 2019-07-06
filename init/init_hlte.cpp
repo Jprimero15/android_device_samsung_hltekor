@@ -39,6 +39,8 @@
 
 #include "init_msm8974.h"
 
+#define ISMATCH(a, b) (!strncmp((a), (b), PROP_VALUE_MAX))
+
 void init_target_properties()
 {
     char platform[PROP_VALUE_MAX];
