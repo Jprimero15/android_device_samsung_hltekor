@@ -48,47 +48,62 @@
 using android::base::GetProperty;
 using android::init::property_set;
 
+// copied from build/tools/releasetools/ota_from_target_files.py
+// but with "." at the end and empty entry
+std::vector<std::string> ro_product_props_default_source_order = {
+    ".",
+    "product.",
+    "product_services.",
+    "odm.",
+    "vendor.",
+    "system.",
+};
 
-void property_override(char const prop[], char const value[])
+void property_override(char const prop[], char const value[], bool add = true)
 {
-    prop_info *pi;
+    auto pi = (prop_info *) __system_property_find(prop);
 
-    pi = (prop_info*) __system_property_find(prop);
-    if (pi)
+    if (pi != nullptr) {
         __system_property_update(pi, value, strlen(value));
-    else
+    } else if (add) {
         __system_property_add(prop, strlen(prop), value, strlen(value));
-}
-
-void property_override_dual(char const system_prop[],
-        char const vendor_prop[], char const value[])
-{
-    property_override(system_prop, value);
-    property_override(vendor_prop, value);
+    }
 }
 
 void vendor_load_properties() {
 
     std::string bootloader = GetProperty("ro.bootloader", "");
+   
+    const auto set_ro_product_prop = [](const std::string &source,
+            const std::string &prop, const std::string &value) {
+        auto prop_name = "ro.product." + source + prop;
+        property_override(prop_name.c_str(), value.c_str(), false);
+    }; 
 
     if (bootloader.find("N900K") == 0) {
         /* hltektt - KT Corp (formerly Korea Telecom) */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/hltektt/hltektt:5.0/LRX21V/N900KKKU0GOC4:user/release-keys");
+       for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/hltektt/hltektt:5.0/LRX21V/N900KKKU0GOC4:user/release-keys");
+            set_ro_product_prop(source, "device", "hltektt");
+            set_ro_product_prop(source, "model", "SM-N900K");
+        }
         property_override("ro.build.description", "hltektt-user 5.0 LRX21V N900KKKU0GOC4 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-N900K");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "hltektt");
     } else if (bootloader.find("N900L") == 0) {
         /* hltelgt - LG Uplus */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/hltelgt/hltelgt:5.0/LRX21V/N900LKLU0GPI1:user/release-keys");
+       for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/hltelgt/hltelgt:5.0/LRX21V/N900LKLU0GPI1:user/release-keys");
+            set_ro_product_prop(source, "device", "hltelgt");
+            set_ro_product_prop(source, "model", "SM-N900L");
+        }
         property_override("ro.build.description", "hltelgt-user 5.0 LRX21V N900LKLU0GPI1 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-N900L");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "hltelgt");
     } else if (bootloader.find("N900S") == 0) {
         /* hlteskt - SK Telecom */
-        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "samsung/hlteskt/hlteskt:5.0/LRX21V/N900SKSU0GPI1:user/release-keys");
+       for (const auto &source : ro_product_props_default_source_order) {
+            set_ro_product_prop(source, "fingerprint", "samsung/hlteskt/hlteskt:5.0/LRX21V/N900SKSU0GPI1:user/release-keys");
+            set_ro_product_prop(source, "device", "hlteskt");
+            set_ro_product_prop(source, "model", "SM-N900S");
+        }
         property_override("ro.build.description", "hlteskt-user 5.0 LRX21V N900SKSU0GPI1 release-keys");
-        property_override_dual("ro.product.model", "ro.vendor.product.model", "SM-N900S");
-        property_override_dual("ro.product.device", "ro.vendor.product.device", "hlteskt");
     }
 
     std::string device = GetProperty("ro.product.device", "");
