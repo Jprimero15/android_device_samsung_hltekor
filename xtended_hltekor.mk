@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit some common Havoc stuff.
-$(call inherit-product, vendor/havoc/config/common_full_phone.mk)
+# Inherit some common MSM-Xtended stuff.
+$(call inherit-product, vendor/xtended/config/common_full_phone.mk)
 
 $(call inherit-product, device/samsung/hltekor/full_hlte.mk)
 
 PRODUCT_DEVICE := hltekor
-PRODUCT_NAME := havoc_hltekor
+PRODUCT_NAME := xtended_hltekor

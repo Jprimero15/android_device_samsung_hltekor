@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/havoc_hltekor.mk
+    $(LOCAL_DIR)/xtended_hltekor.mk
 
 COMMON_LUNCH_CHOICES := \
-    havoc_hltekor-user \
-    havoc_hltekor-userdebug \
-    havoc_hltekor-eng
+    xtended_hltekor-user \
+    xtended_hltekor-userdebug \
+    xtended_hltekor-eng
